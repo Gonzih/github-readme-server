@@ -15,9 +15,11 @@ async fn render_handler(org: String, repo: String) -> Result<impl warp::Reply, w
     let render = Render::new(org, repo).await;
     let readme = render.render();
     let title = render.title();
+    let repo_url = render.repo_url();
     let layout = Layout {
         page_title: &title,
         content: &readme,
+        repo_url: &repo_url,
     };
     let page = layout.to_string();
 

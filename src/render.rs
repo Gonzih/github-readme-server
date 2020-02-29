@@ -35,6 +35,10 @@ impl Render {
         markdown_to_html(&self.txt, &ComrakOptions::default())
     }
 
+    pub fn repo_url(&self) -> String {
+        format!("https://github.com/{}/{}", self.org, self.repo)
+    }
+
     pub fn render(&self) -> String {
         self.render_markdown()
     }
