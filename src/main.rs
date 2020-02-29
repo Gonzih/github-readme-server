@@ -12,10 +12,11 @@ mod layout;
 use layout::Layout;
 
 async fn render_handler(org: String, repo: String) -> Result<impl warp::Reply, warp::Rejection> {
-    let render = Render::new(org, repo);
-    let readme = render.render().await;
+    let render = Render::new(org, repo).await;
+    let readme = render.render();
+    let title = render.title();
     let layout = Layout {
-        page_title: "README",
+        page_title: &title,
         content: &readme,
     };
     let page = layout.to_string();
